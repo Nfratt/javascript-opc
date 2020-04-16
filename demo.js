@@ -1,22 +1,32 @@
 'use strict'; 
 (function() {
-
-  function Person(firstname,lastname){
-    this.firstname=firstname;
-    this.lastname=lastname
+  class Person{
+    constructor(firstname,lastname,age){
+      this.firstname=firstname;
+      this.lastname=lastname;
+      this.age= age
+    }
+    get fullname(){
+      return this.firstname+' '+this.lastname
+    }
+    set fullname(fullname){
+      var nameParts=fullname.split(' ');
+      this.firstname=nameParts[0];
+      this.lastname=nameParts[1];
+    }
+    isAdult(){
+      return this.age >=18
+    }
   }
+  Object.defineProperty(Person.prototype,'fullname',{enumerable:true});
+  let jim= new Person('jim','cooper',29);
 
-  Person.prototype.age = 29
-
-  display(Person.prototype)
-
-  let jim = new Person('Jim','Cooper');
- let sofia= new Person('Sofia','Cooper');
- sofia.__proto__.age =21
-
-  display(jim.__proto__)
-  display(sofia.__proto__)
+function findAlerts(logdata){
+  let regex=/ERROR:/;
+  return regex.exec(logdata)
+} 
 
 
-  display(Person.prototype ===jim.__proto__);
+let date= new Date(10000000);
+display(date.toString())
 })();
